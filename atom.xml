@@ -6,7 +6,7 @@
   <link href="https://faketerrible.github.io/atom.xml" rel="self"/>
   
   <link href="https://faketerrible.github.io/"/>
-  <updated>2021-05-23T08:37:41.124Z</updated>
+  <updated>2021-05-23T13:26:58.045Z</updated>
   <id>https://faketerrible.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>作品集</title>
+    <link href="https://faketerrible.github.io/2021/05/23/%E4%BD%9C%E5%93%81%E9%9B%86/"/>
+    <id>https://faketerrible.github.io/2021/05/23/%E4%BD%9C%E5%93%81%E9%9B%86/</id>
+    <published>2021-05-23T12:44:41.000Z</published>
+    <updated>2021-05-23T13:26:58.045Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="作品链接地址"><a href="#作品链接地址" class="headerlink" title="作品链接地址"></a>作品链接地址</h3><p><a href="https://faketerrible.github.io/2048Game/">2048Game</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;作品链接地址&quot;&gt;&lt;a href=&quot;#作品链接地址&quot; class=&quot;headerlink&quot; title=&quot;作品链接地址&quot;&gt;&lt;/a&gt;作品链接地址&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://faketerrible.github.io/2048Game/&quot;&gt;204</summary>
+      
+    
+    
+    
+    <category term="作品集" scheme="https://faketerrible.github.io/categories/%E4%BD%9C%E5%93%81%E9%9B%86/"/>
+    
+    
+    <category term="作品集" scheme="https://faketerrible.github.io/tags/%E4%BD%9C%E5%93%81%E9%9B%86/"/>
+    
+  </entry>
   
   <entry>
     <title>webpack学习一</title>
