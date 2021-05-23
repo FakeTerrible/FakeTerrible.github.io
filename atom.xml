@@ -6,7 +6,7 @@
   <link href="https://faketerrible.github.io/atom.xml" rel="self"/>
   
   <link href="https://faketerrible.github.io/"/>
-  <updated>2021-05-23T04:24:28.933Z</updated>
+  <updated>2021-05-23T08:37:41.124Z</updated>
   <id>https://faketerrible.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>webpack学习一</title>
+    <link href="https://faketerrible.github.io/2021/05/23/webpack%E5%AD%A6%E4%B9%A0%E4%B8%80/"/>
+    <id>https://faketerrible.github.io/2021/05/23/webpack%E5%AD%A6%E4%B9%A0%E4%B8%80/</id>
+    <published>2021-05-23T06:06:38.000Z</published>
+    <updated>2021-05-23T08:37:41.124Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>本质上，<code>webpack</code> 是一个用于现代 <code>JavaScript</code> 应用程序的 静态模块打包工具。当 <code>webpack</code> 处理应用程序时，它会在内部构建一个 依赖图(dependency graph)，此依赖图对应映射到项目所需的每个模块，并生成一个或多个 <code>bundle</code>。</p><blockquote><p> 注意：从 v4.0.0 开始，webpack 可以不用再引入一个配置文件来打包项目，然而，它仍然有着 高度可配置性，可以很好满足你的需求。</p></blockquote><h3 id="我们为什么要学习webpack"><a href="#我们为什么要学习webpack" class="headerlink" title="我们为什么要学习webpack"></a>我们为什么要学习<a href="https://webpack.docschina.org/concepts/"><code>webpack</code></a></h3><p><em><strong><code>webpack</code>的主要优势</strong></em></p><p>① 模块化开发（import，require）<br>② 预处理（Less，Sass，ES6，TypeScript……）<br>③ 主流框架脚手架支持（Vue，React，Angular）<br>④ 庞大的社区（资源丰富，降低学习成本）</p><span id="more"></span><h3 id="在开始前我们需要先理解一些核心概念："><a href="#在开始前我们需要先理解一些核心概念：" class="headerlink" title="在开始前我们需要先理解一些核心概念："></a>在开始前我们需要先理解一些<strong>核心概念</strong>：</h3><ul><li><strong>入口(entry)</strong></li></ul><p>入口起点(entry point) 指示 webpack 应该使用哪个模块，来作为构建其内部 依赖图(dependency graph) 的开始。进入入口起点后，webpack 会找出有哪些模块和库是入口起点（直接和间接）依赖的。</p><p><strong>webpack.config.js</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">entry</span>:<span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><ul><li><strong>输出(output)</strong></li></ul><p>output 属性告诉 webpack 在哪里输出它所创建的 bundle，以及如何命名这些文件。主要输出文件的默认值是 ./dist/main.js，其他生成文件默认放置在 ./dist 文件夹中。</p><p>webpack.config.js</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.resolve(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;bundle.js&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>上面导入的 path 模块是什么，它是一个 <code>Node.js</code> 核心模块，用于操作文件路径。</p><ul><li><strong>loader</strong></li></ul><p>webpack 只能理解 JavaScript 和 JSON 文件，这是 webpack 开箱可用的自带能力。loader 让 webpack 能够去处理其他类型的文件，并将它们转换为有效 模块，以供应用程序使用，以及被添加到依赖图中。</p><blockquote><p>注意，loader 能够 import 导入任何类型的模块（例如 .css 文件），这是 webpack 特有的功能，其他打包程序或任务执行器的可能并不支持。我们认为这种语言扩展是很有必要的，因为这可以使开发人员创建出更准确的依赖关系图。</p></blockquote><p><em><strong>在更高层面，在 webpack 的配置中，loader 有两个属性</strong></em>：</p><blockquote><ol><li>test 属性，识别出哪些文件会被转换。</li><li>use 属性，定义出在进行转换时，应该使用哪个 loader。</li></ol></blockquote><p><strong>webpack.config.js</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;bundle.js&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [&#123; <span class="attr">test</span>: <span class="regexp">/\.txt$/</span>, use: <span class="string">&#x27;raw-loader&#x27;</span>&#125;],</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>以上配置中，对一个单独的 module 对象定义了 rules 属性，里面包含两个必须属性：test 和 use。这告诉 webpack 编译器(compiler) 如下信息：</p><blockquote><p>“嘿，webpack 编译器，当你碰到「在 require()/import 语句中被解析为 ‘.txt’ 的路径」时，在你对它打包之前，先 use(使用) raw-loader 转换一下。”</p></blockquote><blockquote><p>重要的是要记住，在 webpack 配置中定义 rules 时，要定义在 <code>module.rules</code> 而不是 rules 中。为了使你便于理解，如果没有按照正确方式去做，webpack 会给出警告。</p></blockquote><blockquote><p>请记住，使用正则表达式匹配文件时，你不要为它添加引号。也就是说，<code>/\.txt$/</code> 与 <code>&#39;/\.txt$/&#39;</code> 或 <code>&quot;/\.txt$/&quot;</code> 不一样。前者指示 webpack 匹配任何以 <code>.txt</code> 结尾的文件，后者指示 webpack 匹配具有绝对路径 <code>&#39;.txt&#39;</code> 的单个文件; 这可能不符合你的意图。</p></blockquote><ul><li>插件(plugin)</li></ul><p>loader 用于转换某些类型的模块，而插件则可以用于执行范围更广的任务。包括：打包优化，资源管理，注入环境变量。</p><p>想要使用一个插件，你只需要 require() 它，然后把它添加到 plugins 数组中。多数插件可以通过选项(option)自定义。你也可以在一个配置文件中因为不同目的而多次使用同一个插件，这时需要通过使用 new 操作符来创建一个插件实例。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>); <span class="comment">// 通过 npm 安装</span></span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">&#x27;webpack&#x27;</span>); <span class="comment">// 用于访问内置插件</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [&#123; <span class="attr">test</span>: <span class="regexp">/\.txt$/</span>, use: <span class="string">&#x27;raw-loader&#x27;</span> &#125;],</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">plugins</span>: [<span class="keyword">new</span> HtmlWebpackPlugin(&#123; <span class="attr">template</span>: <span class="string">&#x27;./src/index.html&#x27;</span> &#125;)],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>在上面的示例中，<code>html-webpack-plugin</code> 为应用程序生成一个 HTML 文件，并自动注入所有生成的 bundle。</p><ul><li>模式(mode)</li></ul><p>通过选择 development, production 或 none 之中的一个，来设置 mode 参数，你可以启用 webpack 内置在相应环境下的优化。其默认值为 production。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">mode</span>: <span class="string">&#x27;production&#x27;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><ul><li>浏览器兼容性(browser compatibility)</li></ul><p>webpack 支持所有符合 ES5 标准 的浏览器（不支持 IE8 及以下版本）。webpack 的 import() 和 require.ensure() 需要 Promise。如果你想要支持旧版本浏览器，在使用这些表达式之前，还需要 提前加载 polyfill。</p><ul><li>环境(environment)</li></ul><p>webpack 5 运行于 Node.js v10.13.0+ 的版本.</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h1&gt;&lt;p&gt;本质上，&lt;code&gt;webpack&lt;/code&gt; 是一个用于现代 &lt;code&gt;JavaScript&lt;/code&gt; 应用程序的 静态模块打包工具。当 &lt;code&gt;webpack&lt;/code&gt; 处理应用程序时，它会在内部构建一个 依赖图(dependency graph)，此依赖图对应映射到项目所需的每个模块，并生成一个或多个 &lt;code&gt;bundle&lt;/code&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; 注意：从 v4.0.0 开始，webpack 可以不用再引入一个配置文件来打包项目，然而，它仍然有着 高度可配置性，可以很好满足你的需求。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;我们为什么要学习webpack&quot;&gt;&lt;a href=&quot;#我们为什么要学习webpack&quot; class=&quot;headerlink&quot; title=&quot;我们为什么要学习webpack&quot;&gt;&lt;/a&gt;我们为什么要学习&lt;a href=&quot;https://webpack.docschina.org/concepts/&quot;&gt;&lt;code&gt;webpack&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;&lt;code&gt;webpack&lt;/code&gt;的主要优势&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;① 模块化开发（import，require）&lt;br&gt;② 预处理（Less，Sass，ES6，TypeScript……）&lt;br&gt;③ 主流框架脚手架支持（Vue，React，Angular）&lt;br&gt;④ 庞大的社区（资源丰富，降低学习成本）&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="前端" scheme="https://faketerrible.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="webpack" scheme="https://faketerrible.github.io/tags/webpack/"/>
+    
+  </entry>
   
   <entry>
     <title>搞定分类和标签</title>
@@ -117,7 +143,7 @@
     <link href="https://faketerrible.github.io/2021/05/18/javascript-%E5%AD%A6%E4%B9%A0/"/>
     <id>https://faketerrible.github.io/2021/05/18/javascript-%E5%AD%A6%E4%B9%A0/</id>
     <published>2021-05-18T08:57:00.000Z</published>
-    <updated>2021-05-23T04:01:35.143Z</updated>
+    <updated>2021-05-23T06:21:43.802Z</updated>
     
     <content type="html"><![CDATA[<h3 id="前端学习地址"><a href="#前端学习地址" class="headerlink" title="前端学习地址"></a>前端学习地址</h3><p><a href="https://es6.ruanyifeng.com/">ES6入门教程</a></p><p><a href="https://zh-hans.reactjs.org/">react</a></p><p><a href="https://v3.cn.vuejs.org/">vue</a></p><p><a href="http://nodejs.cn/learn">Node</a></p><p>看一遍或者学一遍，基本可以入门，掌握前端的基本操作和框架。</p>]]></content>
     
@@ -129,6 +155,8 @@
       
     
     
+    
+    <category term="前端" scheme="https://faketerrible.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
     <category term="javascript" scheme="https://faketerrible.github.io/tags/javascript/"/>
