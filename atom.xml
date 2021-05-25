@@ -6,7 +6,7 @@
   <link href="https://faketerrible.github.io/atom.xml" rel="self"/>
   
   <link href="https://faketerrible.github.io/"/>
-  <updated>2021-05-24T13:11:13.520Z</updated>
+  <updated>2021-05-25T12:50:33.407Z</updated>
   <id>https://faketerrible.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>let和const命令</title>
+    <link href="https://faketerrible.github.io/2021/05/25/let%E5%92%8Cconst%E5%91%BD%E4%BB%A4/"/>
+    <id>https://faketerrible.github.io/2021/05/25/let%E5%92%8Cconst%E5%91%BD%E4%BB%A4/</id>
+    <published>2021-05-25T11:33:54.000Z</published>
+    <updated>2021-05-25T12:50:33.407Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自从学习了<code>javascript</code>之后，一直想要继续夯实基础。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;后来机缘巧合，得到了能在线阅读的<a href="https://es6.ruanyifeng.com/">ES6入门教程</a>。一直没有记录笔记，或者只是当做资料参考。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;趁此机会，我决定要记录自己的学习以及阅读感受。</p><h3 id="let命令"><a href="#let命令" class="headerlink" title="let命令"></a><code>let</code>命令</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>let</code>命令是<code>ES6</code>新增的命令。它的用法类似<code>var</code>，但是它声明的变量只在<code>let</code>命令所在的代码块内有效。</p><span id="more"></span><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">var</span> b = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a <span class="comment">// ReferenceError: a is not defined.</span></span><br><span class="line">b <span class="comment">// 1</span></span><br></pre></td></tr></table></figure><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError"><code>ReferenceError</code></a>（引用错误） 对象代表当一个不存在的变量被引用时发生的错误。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>var</code>命令会发生“变量提升”现象，<code>let</code>命令不存在变量提升。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;块级作用域内存在<code>let</code>命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响。总之，在代码块内，使用<code>let</code>命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”（temporal dead zone，简称 TDZ）。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>let</code>不允许在相同作用域内，重复声明同一个变量。</p><h3 id="const命令"><a href="#const命令" class="headerlink" title="const命令"></a><code>const</code>命令</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>const</code>声明一个只读的常量。一旦声明，常量的值就不能改变。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PI = <span class="number">3.1415</span>;</span><br><span class="line">PI <span class="comment">// 3.14415</span></span><br><span class="line"></span><br><span class="line">PI = <span class="number">3</span>;</span><br><span class="line"><span class="comment">// TypeError: Assignment to constant variable.</span></span><br></pre></td></tr></table></figure><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/TypeError"><code>TypeError</code></a>（类型错误） 对象用来表示值的类型非预期类型时发生的错误。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>const</code>的作用域与<code>let</code>命令相同：只在声明所在的块级作用域内有效。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>const</code>命令声明的常量也是不提升，同样存在暂时性死区，只能在声明的位置后面使用。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>const</code>声明的常量，也与<code>let</code>一样不可重复声明。</p><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>let</code>和<code>const</code>命令，有很多相似的地方，只在声明的块级作用域内有效，存在暂时性死区，一样不可重复声明。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>const</code>实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址所保存的数据不得改动。对于简单类型的数据（数值、字符串、布尔值），值就保存在变量指向的那个内存地址，因此等同于常量。但对于复合类型的数据（主要是对象和数组），变量指向的内存地址，保存的只是一个指向实际数据的指针，<code>const</code>只能保证这个指针是固定的（即总是指向另一个固定的地址），至于它指向的数据结构是不是可变的，就完全不能控制了。因此，将一个对象声明为常量必须非常小心。</p>]]></content>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h3&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;自从学习了&lt;code&gt;javascript&lt;/code&gt;之后，一直想要继续夯实基础。&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;后来机缘巧合，得到了能在线阅读的&lt;a href=&quot;https://es6.ruanyifeng.com/&quot;&gt;ES6入门教程&lt;/a&gt;。一直没有记录笔记，或者只是当做资料参考。&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;趁此机会，我决定要记录自己的学习以及阅读感受。&lt;/p&gt;
+&lt;h3 id=&quot;let命令&quot;&gt;&lt;a href=&quot;#let命令&quot; class=&quot;headerlink&quot; title=&quot;let命令&quot;&gt;&lt;/a&gt;&lt;code&gt;let&lt;/code&gt;命令&lt;/h3&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;code&gt;let&lt;/code&gt;命令是&lt;code&gt;ES6&lt;/code&gt;新增的命令。它的用法类似&lt;code&gt;var&lt;/code&gt;，但是它声明的变量只在&lt;code&gt;let&lt;/code&gt;命令所在的代码块内有效。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="前端" scheme="https://faketerrible.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="javascript" scheme="https://faketerrible.github.io/tags/javascript/"/>
+    
+    <category term="ES6" scheme="https://faketerrible.github.io/tags/ES6/"/>
+    
+  </entry>
   
   <entry>
     <title>钟摆旋转</title>
