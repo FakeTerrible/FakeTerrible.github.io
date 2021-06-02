@@ -6,7 +6,7 @@
   <link href="https://faketerrible.github.io/atom.xml" rel="self"/>
   
   <link href="https://faketerrible.github.io/"/>
-  <updated>2021-06-02T00:58:34.976Z</updated>
+  <updated>2021-06-02T07:29:49.002Z</updated>
   <id>https://faketerrible.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Egg.js 起航</title>
+    <link href="https://faketerrible.github.io/2021/06/02/Egg-js-%E8%B5%B7%E8%88%AA/"/>
+    <id>https://faketerrible.github.io/2021/06/02/Egg-js-%E8%B5%B7%E8%88%AA/</id>
+    <published>2021-06-02T06:00:11.000Z</published>
+    <updated>2021-06-02T07:29:49.002Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>Egg.js</code> 为企业级框架和应用而生。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://expressjs.com/"><code>Express</code></a> 是 Node.js 社区广泛使用的框架，简单且扩展性强，非常适合做个人项目。但框架本身缺少约定，标准的 MVC 模型会有各种千奇百怪的写法。Egg 按照约定进行开发，奉行『约定优于配置』，团队协作成本低。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>Egg</code> 继承于 <code>Koa</code>，<code>Koa</code> 是一个非常优秀的框架，然而对于企业级应用来说，它还比较基础。而 <code>Egg</code> 选择了 <code>Koa</code> 作为其基础框架，在它的模型基础上，进一步对它进行了一些增强。</p><h3 id="创建Egg-js应用"><a href="#创建Egg-js应用" class="headerlink" title="创建Egg.js应用"></a>创建Egg.js应用</h3><p><strong>环境准备</strong></p><ul><li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作系统：支持 macOS，Linux，Windows</p></li><li><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;运行环境：建议选择 LTS 版本，最低要求 8.x。</p></li></ul><p><strong>初始化</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir egg-example &amp;&amp; cd egg-example</span><br><span class="line">$ npm init egg --type=simple</span><br><span class="line">$ npm i</span><br></pre></td></tr></table></figure><p><strong>启动项目</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm run dev</span><br><span class="line">$ open http:<span class="comment">//localhost:7001</span></span><br></pre></td></tr></table></figure><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>Egg.js</code>目录约定规范。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">egg-project</span><br><span class="line">├── package.json</span><br><span class="line">├── app.js (可选)</span><br><span class="line">├── agent.js (可选)</span><br><span class="line">├── app</span><br><span class="line">|   ├── router.js</span><br><span class="line">│   ├── controller</span><br><span class="line">│   |   └── home.js</span><br><span class="line">│   ├── service (可选)</span><br><span class="line">│   |   └── user.js</span><br><span class="line">│   ├── middleware (可选)</span><br><span class="line">│   |   └── response_time.js</span><br><span class="line">│   ├── schedule (可选)</span><br><span class="line">│   |   └── my_task.js</span><br><span class="line">│   ├── public (可选)</span><br><span class="line">│   |   └── reset.css</span><br><span class="line">│   ├── view (可选)</span><br><span class="line">│   |   └── home.tpl</span><br><span class="line">│   └── extend (可选)</span><br><span class="line">│       ├── helper.js (可选)</span><br><span class="line">│       ├── request.js (可选)</span><br><span class="line">│       ├── response.js (可选)</span><br><span class="line">│       ├── context.js (可选)</span><br><span class="line">│       ├── application.js (可选)</span><br><span class="line">│       └── agent.js (可选)</span><br><span class="line">├── config</span><br><span class="line">|   ├── plugin.js</span><br><span class="line">|   ├── config.default.js</span><br><span class="line">│   ├── config.prod.js</span><br><span class="line">|   ├── config.test.js (可选)</span><br><span class="line">|   ├── config.local.js (可选)</span><br><span class="line">|   └── config.unittest.js (可选)</span><br><span class="line">└── test</span><br><span class="line">    ├── middleware</span><br><span class="line">    |   └── response_time.test.js</span><br><span class="line">    └── controller</span><br><span class="line">        └── home.test.js</span><br></pre></td></tr></table></figure><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由框架约定的目录：</p><ul><li><p><code>app/router.js</code> 用于配置 URL 路由规则。</p></li><li><p><code>app/controller/**</code> 用于解析用户的输入，处理后返回相应的结果。</p></li><li><p><code>app/service/**</code> 用于编写业务逻辑层，可选，建议使用。</p></li><li><p><code>app/middleware/**</code> 用于编写中间件，可选。</p></li><li><p><code>app/public/**</code> 用于放置静态资源，可选。</p></li><li><p><code>app/extend/**</code> 用于框架的扩展，可选。</p></li><li><p><code>config/config.&#123;env&#125;.js</code> 用于编写配置文件。</p></li><li><p><code>config/plugin.js</code> 用于配置需要加载的插件。</p></li><li><p><code>test/**</code> 用于单元测试。</p></li><li><p><code>app.js</code> 和 <code>agent.js</code> 用于自定义启动时的初始化工作，可选。</p></li></ul><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由内置插件约定的目录：</p><ul><li><p><code>app/public/**</code> 用于放置静态资源，可选。</p></li><li><p><code>app/schedule/**</code> 用于定时任务，可选。</p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;code&gt;Egg.js&lt;/code&gt; 为企</summary>
+      
+    
+    
+    
+    <category term="后端" scheme="https://faketerrible.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+    <category term="javascript" scheme="https://faketerrible.github.io/tags/javascript/"/>
+    
+    <category term="node" scheme="https://faketerrible.github.io/tags/node/"/>
+    
+    <category term="Egg" scheme="https://faketerrible.github.io/tags/Egg/"/>
+    
+  </entry>
   
   <entry>
     <title>字符串的新增方法</title>
